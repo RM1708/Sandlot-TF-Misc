@@ -1,0 +1,68 @@
+(tensorflow) rm@ubuntu:~/Code-GettingStartedWithTF$ python
+Python 3.6.5 |Anaconda, Inc.| (default, Apr 29 2018, 16:14:56) 
+[GCC 7.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import tensorflow as tf
+>>> import numpy as np
+>>> z = [x for x in range(10)]
+>>> as_2D_array = tf.reshape(z, [2, 5])
+>>> step = tf.group(as_2D_array)
+>>> sess = tf.InteractiveSession()
+>>> print(step.run())
+None
+>>> print(sess.run(as_2D_array)
+... )
+[[0 1 2 3 4]
+ [5 6 7 8 9]]
+>>> sess.close()
+>>> z
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+>>> np.shape(z)
+(10,)
+>>> np.asarray(z).shape
+(10,)
+>>> np.asarray(z).reshape(1,-1)
+array([[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]])
+>>> np.asarray(z)[0]
+0
+>>> np.asarray(z).reshape(1,-1).shape
+(1, 10)
+>>> np.asarray(z).reshape(1,-1).shape
+(1, 10)
+>>> np.asarray(z).reshape(1, 2, 5, 1).shape
+(1, 2, 5, 1)
+>>> np.asarray(z).reshape(1, 2, 5, -1).shape
+(1, 2, 5, 1)
+>>> np.asarray(z).reshape(1, 2, 5, 1)
+array([[[[0],
+         [1],
+         [2],
+         [3],
+         [4]],
+
+        [[5],
+         [6],
+         [7],
+         [8],
+         [9]]]])
+>>> np.asarray(z).reshape(1, 2, 5, 1)[0]
+array([[[0],
+        [1],
+        [2],
+        [3],
+        [4]],
+
+       [[5],
+        [6],
+        [7],
+        [8],
+        [9]]])
+>>> np.asarray(z).reshape(1, 2, 5, 1)[0, : , : , 0]
+array([[0, 1, 2, 3, 4],
+       [5, 6, 7, 8, 9]])
+>>> np.asarray(z).reshape(1, 2, 5, 1)[0].shape
+(2, 5, 1)
+>>> np.asarray(z).reshape(1, 2, 5, 1)[0, : , : , 0].shape
+(2, 5)
+>>> 
+

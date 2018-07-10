@@ -1,0 +1,81 @@
+
+#From https://www.tensorflow.org/api_docs/python/tf/nn/convolution
+#################################################################
+tf.nn.convolution(
+    input,
+    filter,
+    padding,
+    strides=None,
+    dilation_rate=None,
+    name=None,
+    data_format=None
+)
+
+
+Specifically, in the case that data_format does not start with "NC", given a rank (N+2) input Tensor of shape
+
+[num_batches, input_spatial_shape[0], ..., input_spatial_shape[N-1], num_input_channels],
+
+a rank (N+2) filter Tensor of shape
+
+[spatial_filter_shape[0], ..., spatial_filter_shape[N-1], num_input_channels, num_output_channels],
+
+an optional dilation_rate tensor of shape N specifying the filter upsampling/input downsampling rate, and an optional ***list*** of N strides (defaulting [1]*N), this computes for each N-D spatial output position (x[0], ..., x[N-1]):
+
+
+  output[b, x[0], ..., x[N-1], k] =
+      sum_{z[0], ..., z[N-1], q}    <<<<<<<<<====== nested summation as given by (SIGMA(range(z[0], ..., SIGMA(range(z[N-1]), 
+							SIGMA(range(q))). THIS IS A TeX COMMAND
+          filter[z[0], ..., z[N-1], q, k] *
+          padded_input[b,
+                       x[0]*strides[0] + dilation_rate[0]*z[0],
+                       ...,
+                       x[N-1]*strides[N-1] + dilation_rate[N-1]*z[N-1],
+                       q]
+
+where b is the index into the batch, k is the output channel number, q is the input channel number, and z is the N-D spatial offset within the filter. Here, padded_input is obtained by zero padding the input using an effective spatial filter shape of (spatial_filter_shape-1) * dilation_rate + 1 and output striding strides
+
+######################################################
+#From https://www.tensorflow.org/api_guides/python/nn#Convolution
+
+The filter is applied to image patches of the same size as the filter and strided according to the strides argument. strides = [1, 1, 1, 1] applies the filter to a patch at every offset, strides = [1, 2, 2, 1] applies the filter to every other image patch in each dimension, etc.
+
+Ignoring channels for the moment, assume that the 4-D input has shape [batch, in_height, in_width, ...] and the 4-D filter has shape [filter_height, filter_width, ...]. The spatial semantics of the convolution ops depend on the padding scheme chosen: 'SAME' or 'VALID'. Note that the padding values are always zero.
+
+First, consider the 'SAME' padding scheme. A detailed explanation of the reasoning behind it is given in these notes. Here, we summarize the mechanics of this padding scheme. When using 'SAME', the output height and width are computed as:
+
+	if (in_height % strides[1] == 0):
+  		pad_along_height = max(filter_height - strides[1], 0)
+	else:
+  		pad_along_height = max(filter_height - (in_height % strides[1]), 0)
+	if (in_width % strides[2] == 0):
+  		pad_along_width = max(filter_width - strides[2], 0)
+	else:
+  		pad_along_width = max(filter_width - (in_width % strides[2]), 0)
+
+	pad_top = pad_along_height // 2
+	pad_bottom = pad_along_height - pad_top
+	pad_left = pad_along_width // 2
+	pad_right = pad_along_width - pad_left
+
+For the 'VALID' scheme, the output height and width are computed as:
+
+	out_height = ceil(float(in_height - filter_height + 1) / float(strides[1]))
+	out_width  = ceil(float(in_width - filter_width + 1) / float(strides[2]))
+
+and no padding is used.
+
+Given the output size and the padding, the output can be computed as
+	output[b, i, j, :] =
+		sum_{d_i, d_j} input[b, strides[1] * i + d_i - pad_{top},\
+		                   strides[2] * j + d_j - pad_{left}, ...] *
+		             filter[d_i, d_j,\ ...]
+
+where any value outside the original input image region are considered zero ( i.e. we pad zero values around the border of the image).
+
+Since input is 4-D, each input[b, i, j, :] is a vector. For conv2d, these vectors are multiplied by the filter[di, dj, :, :] matrices to produce new vectors. For depthwise_conv_2d, each scalar component input[b, i, j, k] is multiplied by a vector filter[di, dj, k], and all the vectors are concatenated.
+
+
+
+
+
