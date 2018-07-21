@@ -108,15 +108,36 @@ def main(_):
         word_ids = tf.placeholder(tf.int32, shape=[batch_size, \
                                                    num_of_word_ids_per_sentence])
 
+        embeddings_3point = \
+            np.asarray([
+                        [0.5] * embedding_space_dimensionality,
+                        [0.25] * embedding_space_dimensionality,
+                        [0.75] * embedding_space_dimensionality,
+                        [0.25] * embedding_space_dimensionality,
+                        [0.75] * embedding_space_dimensionality,
+                        ]) #The odd ids are mapped to 0.25. 
+                            #Even ids are mapped to 0.75
+                            #PAD is mapped to 0.5
+                            #Mapping done only for word-ids 0, 1, 2, 3, 4
+                            #Since only these are used in the test
+
+#                        [0.25] * embedding_space_dimensionality,
+#                        [0.75] * embedding_space_dimensionality,
+#                        [0.25] * embedding_space_dimensionality,
+#                        [0.75] * embedding_space_dimensionality,
+#                        [0.75] * embedding_space_dimensionality,
+                        
         number_of_distinct_words_found = 5
         with tf.name_scope("word_embeddings"):
             #Compare with:
             #https://www.tensorflow.org/guide/embedding#embeddings_in_tensorflow
-            word_embeddings = tf.Variable(
-                tf.random_uniform([number_of_distinct_words_found,
-                                   embedding_space_dimensionality],
-                                  -1.0, 1.0), name='word_embeddings')
+#            word_embeddings = tf.Variable(
+#                tf.random_uniform([number_of_distinct_words_found,
+#                                   embedding_space_dimensionality],
+#                                  -1.0, 1.0), name='word_embeddings')
             
+            word_embeddings =tf.Variable(embeddings_3point)
+
             embedded_word_ids = tf.nn.embedding_lookup(word_embeddings, word_ids)
 
 #The case dimensionality of 1 gives the following embedded_word_ids for
