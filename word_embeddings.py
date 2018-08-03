@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 
 """
-Th code here has been snipped from LSTM_supervised_embeddings.py.
+Th code here has been snipped from 
+/home/rm/Code-LearningTF/05__text_and_visualizations/LSTM_supervised_embeddings.py .
+The file has some expts done after the expts described here.
 
 The idea here is to check what exactly is it that embedding does.
+
 Embedding is acheived by the two functions:
             word_embeddings = tf.Variable(
                 tf.random_uniform([number_of_distinct_words_found,
@@ -127,7 +130,6 @@ def main(_):
 #                        [0.75] * embedding_space_dimensionality,
 #                        [0.75] * embedding_space_dimensionality,
                         
-        number_of_distinct_words_found = 5
         with tf.name_scope("word_embeddings"):
             #Compare with:
             #https://www.tensorflow.org/guide/embedding#embeddings_in_tensorflow
@@ -201,7 +203,7 @@ def main(_):
             print("\nembedded_word_ids:\n", embedded_word_ids)
             print("\nembeddings:\n", Mbdngs)
 
-            print("\n\tDONE: ", __name__)
+            print("\n\tDONE: ", __file__, "\n")
     finally:
         tf.reset_default_graph()
 

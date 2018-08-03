@@ -1,0 +1,31 @@
+tf.Graphs-Save&Restore.py ***
+-------------------------
+* Neat Expt For Saving & Restoring Graphs
+* Handling Exception
+
+variable+name-scope.py
+----------------------
+* Printing Error details on Exception
+* Reset graph
+
+variable_scope-noreuse.py
+-------------------------
+* Printing Error details on Exception
+* Reset graph
+
+transpose_3x3x3x3matrix.py
+--------------------------
+* Observe the transformation owing to transposing a 3x3x3x3 matrix.
+* Motivation was the code in the function images_to_sprite() in the file 
+embedder.py. 
+* Neat representation of a multidim array as a Tree structure. Good way to 
+visualize spaces of more than 3 dimensions.
+* 3x3x3x3 data matrix will be useful for other expts.
+
+programmers_guide.tensors#evaluating_tensors.py
+-----------------------------------------------
+* const_sqrd is also a graph tensor, though it has not been "tensorized" 
+        constant = tf.constant([1, 2, 3])
+        const_sqrd = constant * constant
+        
+

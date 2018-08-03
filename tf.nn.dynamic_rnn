@@ -1,10 +1,14 @@
 #From https://www.tensorflow.org/api_docs/python/tf/nn/dynamic_rnn
+#NOTE: This is not complete
 import tensorflow as tf
+
+hidden_size = 4
 # create a BasicRNNCell
 rnn_cell = tf.nn.rnn_cell.BasicRNNCell(hidden_size)
 
 # 'outputs' is a tensor of shape [batch_size, max_time, cell_state_size]
 
+batch_size = 2
 # defining initial state
 initial_state = rnn_cell.zero_state(batch_size, dtype=tf.float32)
 
@@ -12,10 +16,10 @@ initial_state = rnn_cell.zero_state(batch_size, dtype=tf.float32)
 outputs, state = tf.nn.dynamic_rnn(rnn_cell, input_data,
                                    initial_state=initial_state,
                                    dtype=tf.float32)
-# create 2 LSTMCells
+# create a rnn_cell consisting of 2 LSTMCells
 rnn_layers = [tf.nn.rnn_cell.LSTMCell(size) for size in [128, 256]]
 
-# create a RNN cell composed sequentially of a number of RNNCells
+# create a multi RNN cell composed sequentially of a number of RNNCells
 multi_rnn_cell = tf.nn.rnn_cell.MultiRNNCell(rnn_layers)
 
 # 'outputs' is a tensor of shape [batch_size, max_time, 256]

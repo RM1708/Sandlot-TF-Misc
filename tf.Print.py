@@ -7,18 +7,28 @@ import tensorflow as tf
 a = tf.constant([1.0, 3.0])
 
 # Add print operation
-a = tf.Print(a, [a], message="This is a: ")
+# From the doc:
+#Note: This op prints to the standard error. 
+#It is not currently compatible with jupyter notebook
+#
+#Run from command line to see the print output
+c = tf.Print(a, [a, a, a], message="This is a: ")
 
 # Add more elements of the graph using a
-b = tf.add(a, a)
+b = tf.add(a, c)
 
 sess = tf.InteractiveSession()
-print("From InteractiveSession. b: ", b.eval())
+print("\n#To see the side effect of tf.Print() run from the command line.\n")
+print("From InteractiveSession. \nb: ", b.eval())
+#This does not result in a message and print of the list of tensors
+print("c.eval(): ", c.eval())
 print()
 
 sess.close()
 
 with tf.Session() as sess:
-        print("From Session manager b:",  sess.run(b))
+    print("From Session manager \nb:",  sess.run(b))
+    #This does not result in a message and print of the list of tensors
+    print("c.eval(): ", sess.run(c))
         
 

@@ -2,13 +2,13 @@
 
 import tensorflow as tf
 
-a = tf.constant(1.0)
+a = tf.constant(" RM")
 
-a = tf.Print(a, [a], 'hi')
+b = tf.Print(a, [a], 'hi')
 
 sess = tf.Session()
 
-a.eval(session=sess)
+print("\nb: ", (b.eval(session=sess)).decode())
 
 sess.close()
 

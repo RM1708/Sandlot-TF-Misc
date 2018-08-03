@@ -1,3 +1,4 @@
+'''
 (tensorflow) rm@ubuntu:~$ python
 Python 3.6.5 |Anaconda, Inc.| (default, Apr 29 2018, 16:14:56) 
 [GCC 7.2.0] on linux
@@ -77,4 +78,33 @@ InvalidArgumentError (see above for traceback): You must feed a value for placeh
 ... 
 3.0
 >>> 
+'''
+import tensorflow as tf
 
+constant = tf.constant([1, 2, 3])
+const_sqrd = constant * constant
+
+
+sess = tf.Session()
+
+with sess.as_default():
+    print("const_sqrd.eval(): ", const_sqrd.eval())
+with sess.as_default():
+    with sess.as_default():
+        with sess.as_default():
+            print("\t\tconst_sqrd.eval(): ", const_sqrd.eval())
+        print("\tconst_sqrd.eval(): ", const_sqrd.eval())
+    print("const_sqrd.eval(): ", const_sqrd.eval())
+ 
+#[1 4 9]
+#[1 4 9]
+#[1 4 9]
+
+p = tf.placeholder(tf.float32)
+t = p + 1.0
+with sess.as_default():
+     print("\nt.eval(): ",t.eval(feed_dict={p:2.0}))  # This will succeed because we're feeding a value
+                            # to the placeholder.
+#3.0
+                            
+print("\n\tDONE: ", __file__)

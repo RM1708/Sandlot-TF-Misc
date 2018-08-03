@@ -58,6 +58,11 @@ with tf.Session() as sess:
             yop = [0,1,1,1,1,1,1,0,0,0]
 #        print('accuracy_score', accuracy_score([0,0,0,0,0,0,0,0,0,0], yop))
         tf_a = sess.run(acc, feed_dict={y_p: [0,0,0,0,0,0,0,0,0,0], y_t: yop})
+        tf_a = sess.run(acc, feed_dict={y_p: [0,0,0,0,0,0,0,0,0,0], y_t: yop})
+        tf_a = sess.run(acc, feed_dict={y_p: [0,0,0,0,0,0,0,0,0,0], y_t: yop})
+        tf_a = sess.run(acc, feed_dict={y_p: [0,0,0,0,0,0,0,0,0,0], y_t: yop})
+        tf_a = sess.run(acc, feed_dict={y_p: [0,0,0,0,0,0,0,0,0,0], y_t: yop})
+
         my_a = sess.run(accuracy, feed_dict={y_p: [0,0,0,0,0,0,0,0,0,0], y_t: yop})
         print("TF accuracy: {0}".format(tf_a))
         print("My accuracy: {0}".format(my_a))

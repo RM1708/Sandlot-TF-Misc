@@ -44,11 +44,12 @@ try:
     out1 = vec + 1
     out2 = vec + 2
     result = sess.run(vec)
-    print(result)
-    print("%4.2f, %4.2f, %4.2f"% (result[0], result[1], result[2]))
+    print("result: {}".format(result))
+    print("%7.4f, %7.4f, %7.4f"% (result[0], result[1], result[2]))
 
     print(sess.run(vec))
-    print(sess.run((out1, out2)))
+    out1_, out2_ = sess.run((out1, out2))
+    print("\nout1: {} \nout2: {}".format(out1_, out2_))
     
     x = tf.placeholder(tf.float32)
     y = tf.placeholder(tf.float32)

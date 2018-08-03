@@ -22,8 +22,16 @@ sess = tf.Session()
 
 while True:
   try:
-    print(sess.run(next_item))
+    print("Next Item: ", sess.run(next_item))
   except tf.errors.OutOfRangeError:
+    print("\n\tError: Index Out Of Range")
+    break
+print("\n")
+while True:
+  try:
+    print("Next Item: ", sess.run(next_item))
+  except tf.errors.OutOfRangeError:
+    print("\n\tError: Index Out Of Range")
     break
 print("\n")
 
@@ -41,6 +49,16 @@ while True:
   try:
     print(sess.run(next_row))
   except tf.errors.OutOfRangeError:
+    print("\n\tError: Index Out Of Range")
+    break
+print("\n")
+
+sess.run(iterator.initializer)
+while True:
+  try:
+    print(sess.run(next_row))
+  except tf.errors.OutOfRangeError:
+    print("\n\tError: Index Out Of Range")
     break
 print("\n")
 
@@ -57,7 +75,7 @@ print("\n")
 #The connection weights and biases are managed by the layer object.
 
 x = tf.placeholder(tf.float32, shape=[None, 3])
-linear_model = tf.layers.Dense(units=1)
+linear_model = tf.layers.Dense(units=5)
 y = linear_model(x)
 
 #Initializing Layers
@@ -67,15 +85,19 @@ sess.run(init)
 #variables that existed in the graph when the initializer was created.
 #So the initializer should be one of the last things added during graph construction.
 
-print(sess.run(y, {x: [[1, 2, 3],[4, 5, 6]]}))
+z = (sess.run(y, {x: [[1, 2, 3], [4, 5, 6]]}))
+print("z: \n", z)
+print("z.shape", z.shape)
 print("\n")
 
-y = tf.layers.dense(x, units=1)
+y = tf.layers.dense(x, units=5)
 
 init = tf.global_variables_initializer()
 sess.run(init)
 
-print(sess.run(y, {x: [[1, 2, 3], [4, 5, 6]]}))
+z = (sess.run(y, {x: [[1, 1, 1], [1, 1, 1]]}))
+print("z: \n", z)
+print("z.shape", z.shape)
 print("\n")
 
 

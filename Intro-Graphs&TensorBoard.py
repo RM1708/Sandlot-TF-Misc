@@ -15,10 +15,23 @@ import tensorflow as tf
 import sys, os
 
 """
-3. # a rank 0 tensor; a scalar with shape [],
-[1., 2., 3.] # a rank 1 tensor; a vector with shape [3]
-[[1., 2., 3.], [4., 5., 6.]] # a rank 2 tensor; a matrix with shape [2, 3]
-[[[1., 2., 3.]], [[7., 8., 9.]]] # a rank 3 tensor with shape [2, 1, 3]
+    3.                       # a rank 0 tensor; a scalar with shape [], 
+
+    [1., 2., 3.]             # a rank 1 tensor; a vector with shape [3] 
+
+    [
+         [1., 2., 3.], 
+         [4., 5., 6.]
+    ]                        # a rank 2 tensor; a matrix with shape [2, 3]
+
+    [
+         [
+                 [1., 2., 3.]
+        ], 
+        [
+                [7., 8., 9.]
+        ]
+    ]                       # a rank 3 tensor with shape [2, 1, 3]
 
 """
 try:
@@ -39,7 +52,7 @@ try:
     
     """
     
-    writer = tf.summary.FileWriter('.')
+    writer = tf.summary.FileWriter('/home/rm/tmp/tmp/')
     writer.add_graph(tf.get_default_graph())
     
     """

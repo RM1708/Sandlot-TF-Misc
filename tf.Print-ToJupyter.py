@@ -14,9 +14,9 @@ def tf_print(tensor, transform=None):
 #        print(x if transform is None else transform(x))
         #The above is neat syntactic sugar
         if transform is None: 
-            print("Contents of np.array x: ",x)
+            print("\tContents of np.array x: ",x)
         else:
-           print("Values of x, after applying transformation: ", transform(x))
+           print("\tValues of x, after applying transformation: ", transform(x))
 
         return x
     log_op = tf.py_func(print_tensor, [tensor], [tensor.dtype])[0] #Wraps a python function and uses it as a TensorFlow op.
@@ -36,12 +36,17 @@ def tf_print(tensor, transform=None):
                                             #A context manager that specifies control dependencies for all 
                                             #operations constructed within the contex
      
-        res = tf.identity(tensor)
+        pass
+        #If the following op is outside the with block log_op will not be called, thus
+        #print will not take place
+        res = tf.identity(tensor)   #triggers evaluation of the dependenies
 
-#    with tf.Session() as sess:
-#        sess.run(log_op)
-#        res = tf.identity(tensor)
-       
+    with tf.Session() as sess:
+        print("\nAlternative to activating via control_dependencies")
+        print("NOTE: This prints before that via control_dependencies")
+        print("And before the prints in the two sessions below!!!")
+        sess.run(log_op)
+
     # Return the given tensor
     return res
 
@@ -57,9 +62,13 @@ tensor_1 = tf.identity(tensor)
 # This will print the transformed version of the tensors actual value 
 # (which was summarized to just the min and max for brevity)
 with tf.Session() as sess: #= tf.InteractiveSession()
-    print ("Edge - tensor from node tf_print:")
-    sess.run([tensor])
+    print ("\nEdge: tensor from node tf_print:")
+    res = sess.run([tensor])
+    print("\tShape of Result of sess.run([tensor])", np.asarray(res).shape)
+
 with tf.Session() as sess:
-    print ("Edge -  tensor_1 from node tf.identity:")
-    sess.run([tensor_1])
+    print ("\nEdge:  tensor_1 from node tf.identity:")
+    res = sess.run([tensor_1])
+    print("\tShape of Result of sess.run([tensor])", np.asarray(res).shape)
+
 

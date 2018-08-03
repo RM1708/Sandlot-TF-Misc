@@ -11,7 +11,8 @@ class ImageAugmenter(object):
 
     def augment(self, image):
         #Define the augmentation operation graph node
-        augment_op = tf.image.random_saturation(self.im_placeholder, 0.6, 0.8)
+        augment_op = tf.image.random_saturation(self.im_placeholder, (1.0 - 1.0E-09), 1.00)
+#        augment_op = tf.image.adjust_saturation(self.im_placeholder, -10.0)
         return self.sess.run(augment_op, {self.im_placeholder: image})
 
 class ListOfImages(object):
@@ -50,6 +51,8 @@ if __name__ == "__main__":
     sess = tf.Session()
     image_data = ListOfImages(IMAGE_DATA_DIR, sess)
     ListOfAugmentedImages = image_data.process_data()
+    print(image_data.images)
+    print()
     print(ListOfAugmentedImages)
     sess.close()
 
