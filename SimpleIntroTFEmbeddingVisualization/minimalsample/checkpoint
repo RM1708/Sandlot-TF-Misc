@@ -1,0 +1,2 @@
+model_checkpoint_path: "/home/rm/Sandlot-TensorFlow/SimpleIntroTFEmbeddingVisualization/minimalsample/model.ckpt-1"
+all_model_checkpoint_paths: "/home/rm/Sandlot-TensorFlow/SimpleIntroTFEmbeddingVisualization/minimalsample/model.ckpt-1"
