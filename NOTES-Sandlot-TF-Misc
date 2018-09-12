@@ -28,4 +28,7 @@ programmers_guide.tensors#evaluating_tensors.py
         constant = tf.constant([1, 2, 3])
         const_sqrd = constant * constant
         
+VGG16_get_the_top-10_probable_classes.py
+----------------------------------------
+* Print using list comprehension - Neat:-)
 
