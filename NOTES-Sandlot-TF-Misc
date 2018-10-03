@@ -32,3 +32,9 @@ VGG16_get_the_top-10_probable_classes.py
 ----------------------------------------
 * Print using list comprehension - Neat:-)
 
+../SimpleIntroTFEmbeddingVisualization/EmbeddingVisualization.py
+--------------------------------------------------------------
+* Visualization of the input data
+* Sprite image from image
+
+

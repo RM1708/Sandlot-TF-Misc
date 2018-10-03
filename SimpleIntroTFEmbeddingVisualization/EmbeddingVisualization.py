@@ -1,6 +1,9 @@
 
 # coding: utf-8
 
+#http://www.pinchofintelligence.com/simple-introduction-to-tensorboard-embedding-visualisation/
+#https://github.com/rmeertens/Simplest-Tensorflow-Tensorboard-MNIST-Embedding-Visualisation/blob/master/Minimal%20example%20embeddings.ipynb
+
 # Simple Introduction to Tensorboard Embedding Visualisation
 # by Roland Meertens on April 19, 2017	
 # Visualising embeddings is a powerful technique! 
@@ -16,7 +19,7 @@ import os
 from tensorflow.contrib.tensorboard.plugins import projector
 from tensorflow.examples.tutorials.mnist import input_data
 
-LOG_DIR = "/home/rm/Sandlot-TensorFlow/SimpleIntroTFEmbeddingVisualization/minimalsample"
+LOG_DIR = "/home/rm/Sandlot-TF-Misc/SimpleIntroTFEmbeddingVisualization/minimalsample"
 NAME_TO_VISUALISE_VARIABLE = "mnistembedding"
 TO_EMBED_COUNT = 500
 
@@ -175,7 +178,7 @@ with tf.Session() as sess:
 
 print("\n\tEXAMPLE OF WHAT THE OUTPUT LOOKS LIKE.")
 import matplotlib.image as mpimg
-img0=mpimg.imread('/home/rm/Sandlot-TensorFlow/SimpleIntroTFEmbeddingVisualization/img/Embedding-0.png')
+img0=mpimg.imread('/home/rm/Sandlot-TF-Misc/SimpleIntroTFEmbeddingVisualization/img/Embedding-0.png')
 plt.imshow(img0)
 plt.show()
 
@@ -184,14 +187,14 @@ print("Click the embeddings tab to see the PCA of our MNIST digits. \n" +
       "You *** probably *** see some nice groupings (zeroes close to each other, \n" +
       "sixes close to each other, etc.).")
 
-img1=mpimg.imread('/home/rm/Sandlot-TensorFlow/SimpleIntroTFEmbeddingVisualization/img/Embedding-1.png')
+img1=mpimg.imread('/home/rm/Sandlot-TF-Misc/SimpleIntroTFEmbeddingVisualization/img/Embedding-1.png')
 plt.imshow(img1)
 plt.show()
 
 print("You can also try T-SNE to see the digits move around while \n" + 
       "they are trying to form groups.")
 
-img2=mpimg.imread('/home/rm/Sandlot-TensorFlow/SimpleIntroTFEmbeddingVisualization/img/Embedding-2.png')
+img2=mpimg.imread('/home/rm/Sandlot-TF-Misc/SimpleIntroTFEmbeddingVisualization/img/Embedding-2.png')
 plt.imshow(img2)
 plt.show()
 
